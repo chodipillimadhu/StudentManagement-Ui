@@ -1,0 +1,105 @@
+<div class="container mt-4">
+
+  <h2>Students</h2>
+
+  <div class="card p-3 mb-4">
+
+    <input
+      class="form-control mb-2"
+      placeholder="Name"
+      [(ngModel)]="student.name"
+      required>
+
+    <input
+      class="form-control mb-2"
+      placeholder="Email"
+      [(ngModel)]="student.email"
+      type="email">
+
+    <input
+      class="form-control mb-2"
+      type="number"
+      placeholder="Age"
+      [(ngModel)]="student.age"
+        min="18"
+  max="60"
+  required>
+
+    <input
+      class="form-control mb-2"
+      placeholder="Course"
+      [(ngModel)]="student.course"
+      required>
+
+    <button
+      class="btn btn-success me-2"
+        [disabled]="
+    !student.name ||
+    !student.email ||
+    !student.age ||
+    !student.course
+  "
+      (click)="addOrUpdateStudent()">
+
+      {{ isEdit ? 'Update Student' : 'Add Student' }}
+
+    </button>
+
+    <button
+      class="btn btn-secondary"
+      *ngIf="isEdit"
+      (click)="resetForm()">
+
+      Cancel
+    </button>
+
+  </div>
+
+  <table class="table table-bordered">
+
+    <thead>
+
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Age</th>
+        <th>Course</th>
+        <th>Actions</th>
+      </tr>
+
+    </thead>
+
+    <tbody>
+
+      <tr *ngFor="let s of students">
+
+        <td>{{s.name}}</td>
+        <td>{{s.email}}</td>
+        <td>{{s.age}}</td>
+        <td>{{s.course}}</td>
+
+        <td>
+
+          <button
+            class="btn btn-primary btn-sm me-2"
+            (click)="editStudent(s)">
+
+            Edit
+          </button>
+
+          <button
+            class="btn btn-danger btn-sm"
+            (click)="deleteStudent(s.id)">
+
+            Delete
+          </button>
+
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>
